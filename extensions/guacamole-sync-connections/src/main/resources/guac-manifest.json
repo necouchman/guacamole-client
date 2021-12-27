@@ -1,0 +1,11 @@
+{
+    "guacamoleVersion" : "1.4.0",
+
+    "name"             : "Active Connection Sync",
+    "namespace"        : "connsync",
+
+    "authProviders"    : [
+        "org.apache.guacamole.auth.sync.ActiveConnectionSyncProvider"
+    ]
+
+}
