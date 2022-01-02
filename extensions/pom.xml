@@ -48,6 +48,9 @@
         <module>guacamole-auth-quickconnect</module>
         <module>guacamole-auth-sso</module>
         <module>guacamole-auth-totp</module>
+        
+        <!-- Non-authentication extensions -->
+        <module>guacamole-active-connections</module>
 
     </modules>
 

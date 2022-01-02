@@ -1,0 +1,12 @@
+{
+
+    "guacamoleVersion" : "1.4.0",
+
+    "name"      : "Guacamole Active Connections",
+    "namespace" : "active-connections",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.active.GuacamoleActiveConnectionProvider"
+    ]
+
+}
