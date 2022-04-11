@@ -603,6 +603,11 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
                 });
             });
         };
+        
+        // Handle any received URIs, opening in a new tab.
+        client.onuri = function onuri(uri) {
+            window.open(uri, "_blank");
+        }
 
         // Manage the client display
         managedClient.managedDisplay = ManagedDisplay.getInstance(client.getDisplay());
