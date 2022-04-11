@@ -57,7 +57,14 @@ public enum GuacamoleProtocolCapability {
      * forwarding the client timezone was introduced in
      * {@link GuacamoleProtocolVersion#VERSION_1_1_0}.
      */
-    TIMEZONE_HANDSHAKE(GuacamoleProtocolVersion.VERSION_1_1_0);
+    TIMEZONE_HANDSHAKE(GuacamoleProtocolVersion.VERSION_1_1_0),
+    
+    /**
+     * Support for the "uri" instruction, allowing a remote server to send
+     * a URI to the client for the client to process locally.
+     * {@link GuacamoleProtocolVersion#VERSION_1_6_0}.
+     */
+    URI_INSTRUCTION(GuacamoleProtocolVersion.VERSION_1_6_0);
     
     /**
      * The minimum protocol version required to support this capability.

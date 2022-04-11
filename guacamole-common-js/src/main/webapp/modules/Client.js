@@ -842,6 +842,17 @@ Guacamole.Client = function(tunnel) {
      *     The timestamp associated with the sync instruction.
      */
     this.onsync = null;
+    
+    /**
+     * Fired whenever a "uri" instruction is received from the server,
+     * prompting the client to trigger the URI locally on their system, if
+     * configured.
+     * 
+     * @event
+     * @param {!string} uri
+     *     The URI sent from the server.
+     */
+    this.onuri = null;
 
     /**
      * Returns the layer with the given index, creating it if necessary.
@@ -1607,6 +1618,11 @@ Guacamole.Client = function(tunnel) {
             if (object && object.onundefine)
                 object.onundefine();
 
+        },
+        
+        "uri": function(parameters) {
+            if (guac_client.onuri)
+                guac_client.onuri(parameters[0]);
         },
 
         "video": function(parameters) {

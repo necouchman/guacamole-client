@@ -52,12 +52,19 @@ public class GuacamoleProtocolVersion {
      * client.
      */
     public static final GuacamoleProtocolVersion VERSION_1_3_0 = new GuacamoleProtocolVersion(1, 3, 0);
+    
+    /**
+     * Protocol version 1.6.0, which introduces the "uri" instruction, allowing
+     * a remote server to send a URI to the client where it can potentially be
+     * processed locally by the client.
+     */
+    public static final GuacamoleProtocolVersion VERSION_1_6_0 = new GuacamoleProtocolVersion(1, 6, 0);
 
     /**
      * The most recent version of the Guacamole protocol at the time this
      * version of GuacamoleProtocolVersion was built.
      */
-    public static final GuacamoleProtocolVersion LATEST = VERSION_1_3_0;
+    public static final GuacamoleProtocolVersion LATEST = VERSION_1_6_0;
     
     /**
      * A regular expression that matches the VERSION_X_Y_Z pattern, where
