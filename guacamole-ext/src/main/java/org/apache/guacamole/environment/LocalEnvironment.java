@@ -61,6 +61,7 @@ public class LocalEnvironment implements Environment {
         "rdp",
         "ssh",
         "telnet",
+        "tn5250",
         "vnc",
     };
 
