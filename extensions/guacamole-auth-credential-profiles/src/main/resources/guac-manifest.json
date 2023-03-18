@@ -1,0 +1,32 @@
+{
+
+    "guacamoleVersion" : "1.5.0",
+
+    "name"      : "Credential Profile Extension",
+    "namespace" : "credprof",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.credprof.CredentialProfileAuthenticationProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ],
+    
+    "html" : [
+        "html/settings-credentials.html"
+    ],
+
+    "js" : [
+        "credprof.min.js"
+    ],
+
+    "css" : [
+        "credprof.min.css"
+    ],
+
+    "resources" : {
+        "templates/guacSettingsCredentialProfiles.html" : "text/html"
+    }
+
+}

@@ -1,0 +1,17 @@
+{
+    "SETTINGS_CREDENTIALS" : {
+        
+        "ACTION_CREDENTIAL_SETTINGS_PAGE" : "Credentials",
+        
+        "ACTION_UPDATE_CREDENTIAL_PROFILE" : "Update",
+        
+        "FIELD_HEADER_CREDENTIAL_USERNAME"       : "Username:",
+        "FIELD_HEADER_CREDENTIAL_PASSWORD"       : "Password:",
+        "FIELD_HEADER_CREDENTIAL_DOMAIN"         : "Domain:",
+        "FIELD_HEADER_CREDENTIAL_SSH_KEY"        : "SSH key:",
+        "FIELD_HEADER_CREDENTIAL_SSH_PASSPHRASE" : "SSH passphrase:",
+        
+        "SECTION_HEADER_CREDENTIAL_MANAGEMENT"     : "Credential Management"
+        
+    }
+}
