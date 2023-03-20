@@ -48,6 +48,7 @@
         <module>guacamole-auth-ldap</module>
         <module>guacamole-auth-quickconnect</module>
         <module>guacamole-auth-sso</module>
+        <module>guacamole-auth-temp-credentials</module>
         <module>guacamole-auth-totp</module>
 
         <!-- Additional features -->

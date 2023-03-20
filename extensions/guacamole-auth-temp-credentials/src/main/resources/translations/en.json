@@ -1,0 +1,24 @@
+{
+    
+    "DATA_SOURCE_TEMP_CREDENTALS" : {
+        "NAME" : "Temporary Credentials"
+    },
+    
+    "TEMP_CREDENTIAL" : {
+        
+        "INFO_PROVIDE_TEMP_CREDENTIALS" : "Please provide temporary credentials."
+        
+    },
+    
+    "LOGIN" : {
+        
+        "FIELD_HEADER_GUAC_TEMP_DOMAIN"               : "Temporary domain",
+        "FIELD_HEADER_GUAC_TEMP_PASSWORD"             : "Temporary password",
+        "FIELD_HEADER_GUAC_TEMP_CREDENTIALS_PROVIDED" : "",
+        "FIELD_HEADER_GUAC_TEMP_SSHKEY"               : "Temporary SSH key",
+        "FIELD_HEADER_GUAC_TEMP_SSHPASSPHRASE"        : "Temporary SSH key passphrase",
+        "FIELD_HEADER_GUAC_TEMP_USERNAME"             : "Temporary username"
+        
+    }
+    
+}

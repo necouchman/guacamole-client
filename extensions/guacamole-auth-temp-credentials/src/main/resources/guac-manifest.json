@@ -1,0 +1,24 @@
+{
+
+    "guacamoleVersion" : "1.5.0",
+
+    "name"      : "Temporary Credential Token Storage",
+    "namespace" : "tempcred",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.tempcred.TempCredentialAuthenticationProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ],
+    
+    "js" : [
+        "tempCred.min.js"
+    ],
+    
+    "resources" : {
+        "templates/hiddenField.html" : "text/html"
+    }
+
+}
