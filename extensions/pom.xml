@@ -52,6 +52,7 @@
 
         <!-- Additional features -->
         <module>guacamole-history-recording-storage</module>
+        <module>guacamole-template-connection-group</module>
         <module>guacamole-vault</module>
 
         <!-- Utility extensions -->

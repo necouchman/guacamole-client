@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.1",
+
+    "name"      : "Template Connection Group",
+    "namespace" : "template-connection-group",
+
+    "authProviders" : [
+        "org.apache.guacamole.template.TemplateConnectionGroupProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
