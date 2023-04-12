@@ -38,7 +38,7 @@ public class ActiveConnectionMultimap {
      * All active connections to a connection having a given identifier.
      */
     private final Map<String, Set<ActiveConnectionRecord>> records =
-            new HashMap<String, Set<ActiveConnectionRecord>>();
+            new HashMap<>();
 
     /**
      * Stores the given connection record in the list of active connections
@@ -56,7 +56,7 @@ public class ActiveConnectionMultimap {
             // Get set of active connection records, creating if necessary
             Set<ActiveConnectionRecord> connections = records.get(identifier);
             if (connections == null) {
-                connections = Collections.synchronizedSet(Collections.newSetFromMap(new LinkedHashMap<ActiveConnectionRecord, Boolean>()));
+                connections = Collections.synchronizedSet(Collections.newSetFromMap(new LinkedHashMap<>()));
                 records.put(identifier, connections);
             }
 

@@ -121,7 +121,7 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
      * All active connections through the tunnel having a given UUID.
      */
     private final Map<String, ActiveConnectionRecord> activeTunnels =
-            new ConcurrentHashMap<String, ActiveConnectionRecord>();
+            new ConcurrentHashMap<>();
     
     /**
      * All active connections to a connection having a given identifier.

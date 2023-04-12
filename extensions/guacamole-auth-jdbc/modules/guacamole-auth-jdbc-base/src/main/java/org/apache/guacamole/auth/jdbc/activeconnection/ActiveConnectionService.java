@@ -82,13 +82,13 @@ public class ActiveConnectionService
 
         String username = user.getIdentifier();
         boolean isPrivileged = user.isPrivileged();
-        Set<String> identifierSet = new HashSet<String>(identifiers);
+        Set<String> identifierSet = new HashSet<>(identifiers);
 
         // Retrieve all visible connections (permissions enforced by tunnel service)
         Collection<ActiveConnectionRecord> records = tunnelService.getActiveConnections(user);
 
         // Restrict to subset of records which match given identifiers
-        Collection<TrackedActiveConnection> activeConnections = new ArrayList<TrackedActiveConnection>(identifiers.size());
+        Collection<TrackedActiveConnection> activeConnections = new ArrayList<>(identifiers.size());
         for (ActiveConnectionRecord record : records) {
 
             // The current user should have access to sensitive information and

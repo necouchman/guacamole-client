@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.1",
+
+    "name"      : "Active Connection Sync Provider",
+    "namespace" : "activesync",
+
+    "authProviders" : [
+        "org.apache.guacamole.sync.ActiveConnectionSyncProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
