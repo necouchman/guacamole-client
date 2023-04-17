@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.1",
+
+    "name"      : "TACACS+ Authentication Backend",
+    "namespace" : "tacacs",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.tacacs.TacacsAuthenticationProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
