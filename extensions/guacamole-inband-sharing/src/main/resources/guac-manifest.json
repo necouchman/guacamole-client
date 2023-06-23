@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.2",
+
+    "name"      : "In-band Connection Sharing",
+    "namespace" : "inband-sharing",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.sharing.InbandSharingpRovider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
