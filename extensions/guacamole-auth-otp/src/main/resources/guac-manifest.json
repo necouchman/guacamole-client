@@ -1,0 +1,20 @@
+{
+
+    "guacamoleVersion" : "1.5.2",
+
+    "name"      : "One-Time Password Authentication Provider",
+    "namespace" : "otp",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.otp.OTPAuthenticationProvider"
+    ],
+    
+    "listeners": [
+        "org.apache.guacamole.auth.otp.OTPAuthenticationEventListener"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}

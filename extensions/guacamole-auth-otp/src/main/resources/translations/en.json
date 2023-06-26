@@ -1,0 +1,45 @@
+{
+    "DATA_SOURCE_OTP" : {
+        "NAME" : "OTP MFA Backend"
+    },
+    
+    "LOGIN" : {
+        "FIELD_HEADER_OTP_CHALLENGE_FIELD" : ""
+    },
+    
+    "OTP" : {
+        
+        "INFO_PASSWORD_REQUIRED"    : "Enter your one-time password:",
+        "INFO_VERIFICATION_FAILED"  : "Failed to verify one-time password."
+        
+    },
+    
+    "USER_ATTRIBUTES" : {
+        
+        "FIELD_HEADER_GUAC_OTP_DISABLED" : "OTP disabled:",
+        "FIELD_HEADER_GUAC_OTP_EMAIL"    : "Alternate E-mail Address:",
+        "FIELD_HEADER_GUAC_OTP_METHOD"   : "Messaging method:",
+        "FIELD_HEADER_GUAC_OTP_PHONE"    : "Phone number:",
+        "FIELD_HEADER_GUAC_OTP_TIMEOUT"  : "Password age (seconds):",
+        
+        "FIELD_OPTION_GUAC_OTP_METHOD_EMAIL" : "E-mail",
+        "FIELD_OPTION_GUAC_OTP_METHOD_SMS"   : "SMS (text message)",
+        
+        "SECTION_HEADER_OTP_USER_CONFIG" : "OTP Configuration"
+        
+    },
+    
+    "USER_GROUP_ATTRIBUTES" : {
+        
+        "FIELD_HEADER_GUAC_OTP_DISABLED": "OTP disabled:",
+        "FIELD_HEADER_GUAC_OTP_METHOD": "Messaging method:",
+        "FIELD_HEADER_GUAC_OTP_TIMEOUT": "Password age (seconds)::",
+        
+        "FIELD_OPTION_GUAC_OTP_METHOD_EMAIL": "E-mail",
+        "FIELD_OPTION_GUAC_OTP_METHOD_SMS": "SMS (text message)",
+
+        "SECTION_HEADER_OTP_USER_CONFIG": "OTP Configuration"
+        
+    }
+    
+}

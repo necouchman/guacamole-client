@@ -1,0 +1,1 @@
+jakarta.mail:jakarta.mail-api:jar:2.1.2
