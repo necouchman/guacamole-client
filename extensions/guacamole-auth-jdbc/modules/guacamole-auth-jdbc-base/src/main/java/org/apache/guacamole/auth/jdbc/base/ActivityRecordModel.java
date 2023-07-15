@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.auth.jdbc.base;
 
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -57,6 +58,13 @@ public class ActivityRecordModel {
      * the activity is still in progress.
      */
     private Date endDate;
+    
+    /**
+     * Map of all arbitrary attributes associated with this record but not
+     * directly mapped to a particular column.
+     */
+    private ArbitraryAttributeMap arbitraryAttributes
+            = new ArbitraryAttributeMap();
 
     /**
      * Returns the ID of this record in the database, if it exists.
@@ -188,6 +196,60 @@ public class ActivityRecordModel {
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+    
+    /**
+     * Returns a map of attribute name/value pairs for all attributes associated
+     * with this record which do not have explicit mappings to actual record
+     * properties. All other attributes (those which are explicitly supported by
+     * the record) should instead be mapped to properties with corresponding and
+     * properly-typed columns.
+     *
+     * @return
+     *     A map of attribute name/value pairs for all attributes associated
+     *     with this record which do not otherwise have explicit mappings to
+     *     properties.
+     */
+    public ArbitraryAttributeMap getArbitraryAttributeMap() {
+        return arbitraryAttributes;
+    }
+
+    /**
+     * Returns whether at least one arbitrary attribute name/value pair has been
+     * associated with this record.
+     *
+     * @return
+     *     true if this record has at least one arbitrary attribute set, false
+     *     otherwise.
+     */
+    public boolean hasArbitraryAttributes() {
+        return !arbitraryAttributes.isEmpty();
+    }
+
+    /**
+     * Returns a Collection view of the equivalent attribute model objects which
+     * make up the map of arbitrary attribute name/value pairs returned by
+     * getArbitraryAttributeMap(). Additions and removals on the returned
+     * Collection directly affect the attribute map.
+     *
+     * @return
+     *     A Collection view of the map returned by getArbitraryAttributeMap().
+     */
+    public Collection<ArbitraryAttributeModel> getArbitraryAttributes() {
+        return arbitraryAttributes.toModelCollection();
+    }
+
+    /**
+     * Replaces all arbitrary attributes associated with this record with the
+     * attribute name/value pairs within the given collection of model objects.
+     *
+     * @param arbitraryAttributes
+     *     The Collection of model objects containing the attribute name/value
+     *     pairs which should replace all currently-stored arbitrary attributes,
+     *     if any.
+     */
+    public void setArbitraryAttributes(Collection<ArbitraryAttributeModel> arbitraryAttributes) {
+        this.arbitraryAttributes = ArbitraryAttributeMap.fromModelCollection(arbitraryAttributes);
     }
 
 }

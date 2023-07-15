@@ -31,6 +31,15 @@
         <result column="username"    property="username"   jdbcType="VARCHAR"/>
         <result column="start_date"  property="startDate"  jdbcType="TIMESTAMP"/>
         <result column="end_date"    property="endDate"    jdbcType="TIMESTAMP"/>
+                
+        <!-- Arbitrary attributes -->
+        <collection property="arbitraryAttributes" resultSet="arbitraryAttributes"
+                    ofType="org.apache.guacamole.auth.jdbc.base.ArbitraryAttributeModel"
+                    column="history_id" foreignColumn="history_id">
+            <result property="name"     column="attribute_name"  jdbcType="VARCHAR"/>
+            <result property="value"    column="attribute_value" jdbcType="VARCHAR"/>
+        </collection>
+        
     </resultMap>
 
     <!-- Insert the given user record -->
@@ -186,5 +195,40 @@
         LIMIT #{limit,jdbcType=INTEGER}
 
     </select>
+    
+    <!-- Retrieve arbitrary attributes for the specified history entries -->
+    <select id="selectAttributes" resultMap="arbitraryAttributes">
+        SELECT
+            history_id,
+            attribute_name,
+            attribute_value
+        FROM guacamole_user_history_attribute
+        WHERE history_id IN
+            <foreach collection="identifiers" item="identifier"
+                         open="(" separator="," close=")">
+                #{identifier,jdbcType=INTEGER}
+            </foreach>;
+    </select>
+    
+    <!-- Delete attributes associated with connection -->
+    <delete id="deleteAttributes">
+        DELETE FROM guacamole_user_history_attribute
+        WHERE history_id = #{object.recordID,jdbcType=INTEGER}
+    </delete>
+
+    <!-- Insert attributes for connection -->
+    <insert id="insertAttributes" parameterType="org.apache.guacamole.auth.jdbc.base.ArbitraryAttributeModel">
+        INSERT INTO guacamole_user_history_attribute (
+            history_id,
+            attribute_name,
+            attribute_value
+        )
+        VALUES
+            <foreach collection="object.arbitraryAttributes" item="attribute" separator=",">
+                (#{object.recordID,jdbcType=INTEGER},
+                #{attribute.name,jdbcType=VARCHAR},
+                #{attribute.value,jdbcType=VARCHAR})
+            </foreach>
+    </insert>
 
 </mapper>

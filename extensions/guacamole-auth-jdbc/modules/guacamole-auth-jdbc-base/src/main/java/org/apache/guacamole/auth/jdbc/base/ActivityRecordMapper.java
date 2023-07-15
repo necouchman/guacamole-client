@@ -143,5 +143,42 @@ public interface ActivityRecordMapper<ModelType> {
             @Param("sortPredicates") List<ActivityRecordSortPredicate> sortPredicates,
             @Param("limit") int limit,
             @Param("effectiveGroups") Collection<String> effectiveGroups);
+    
+    /**
+     * Retrieve a map of arbitrary attributes currently associated with the
+     * given activity record in the database.
+     * 
+     * @param record
+     *     The activity record who arbitrary attributes should be retrieved.
+     * 
+     * @return 
+     *     The attribute map associated with the object.
+     */
+    ArbitraryAttributeMap getAttributes(@Param("record") ModelType record);
+    
+    /**
+     * Deletes any arbitrary attributes currently associated with the given
+     * activity record in the database.
+     *
+     * @param record
+     *     The activity record whose arbitrary attributes should be deleted.
+     *
+     * @return
+     *     The number of rows deleted.
+     */
+    int deleteAttributes(@Param("record") ModelType record);
+
+    /**
+     * Inserts all arbitrary attributes associated with the given activity
+     * record.
+     *
+     * @param record
+     *     The activity records whose arbitrary attributes should
+     *     be inserted.
+     *
+     * @return
+     *     The number of rows inserted.
+     */
+    int insertAttributes(@Param("record") ModelType record);
 
 }

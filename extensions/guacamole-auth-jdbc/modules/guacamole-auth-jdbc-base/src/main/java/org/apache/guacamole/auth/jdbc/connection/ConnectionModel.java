@@ -73,7 +73,7 @@ public class ConnectionModel extends ChildObjectModel {
      * The identifiers of all readable sharing profiles associated with this
      * connection.
      */
-    private Set<String> sharingProfileIdentifiers = new HashSet<String>();
+    private Set<String> sharingProfileIdentifiers = new HashSet<>();
 
     /**
      * The hostname of the guacd instance to use, or null if the hostname of the

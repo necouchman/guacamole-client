@@ -611,3 +611,47 @@ CREATE TABLE guacamole_user_password_history (
     REFERENCES `guacamole_user` (`user_id`) ON DELETE CASCADE
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table of arbitrary connection history attributes. Each attribute is simply a
+-- name/value pair associated with a connection history record. Arbitrary
+-- attributes can be defined by this extension or by other extensions that
+-- decorate this one, delegating underlying storage to this extension.
+--
+
+CREATE TABLE guacamole_connection_history_attribute (
+
+  `history_id`      int(11)       NOT NULL,
+  `attribute_name`  varchar(128)  NOT NULL,
+  `attribute_value` varchar(4096) NOT NULL,
+
+  PRIMARY KEY (history_id, attribute_name),
+  KEY `history_id` (`history_id`),
+
+  CONSTRAINT guacamole_connection_history_attribute_ibfk_1
+    FOREIGN KEY (history_id)
+    REFERENCES guacamole_connection_history(history_id) ON DELETE CASCADE
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table of arbitrary user history attributes. Each attribute is simply a
+-- name/value pair associated with a user history record. Arbitrary attributes
+-- can be defined by this extension or by other, decorating extensions, that
+-- delegate underlying storage to this extension.
+--
+
+CREATE TABLE guacamole_user_history_attribute (
+
+  `history_id`      int(11)       NOT NULL,
+  `attribute_name`  varchar(128)  NOT NULL,
+  `attribute_value` varchar(4096) NOT NULL,
+
+  PRIMARY KEY (history_id, attribute_name),
+  KEY `history_id` (`history_id`),
+
+  CONSTRAINT guacamole_user_history_attribute_ibfk_1
+    FOREIGN KEY (history_id)
+    REFERENCES guacamole_user_history(history_id) ON DELETE CASCADE
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

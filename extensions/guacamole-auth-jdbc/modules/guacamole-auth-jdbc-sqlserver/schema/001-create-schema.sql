@@ -843,6 +843,58 @@ CREATE NONCLUSTERED INDEX [IX_guacamole_user_password_history_user_id]
 GO
 
 --
+-- Table of arbitrary connection history attributes. Each attribute is simply a
+-- name/value pair associated with a connection history record. Arbitrary
+-- attributes can be defined by either this extension or by other extensions
+-- that decorate this one, delegating storage of the attributes to this
+-- extension.
+--
+
+CREATE TABLE [guacamole_connection_history_attribute] (
+
+    [history_id]      [int]            NOT NULL,
+    [attribute_name]  [nvarchar](128)  NOT NULL,
+    [attribute_value] [nvarchar](4000) NOT NULL,
+
+    CONSTRAINT [PK_guacamole_connection_history_attribute]
+        PRIMARY KEY CLUSTERED ([history_id], [attribute_name]),
+
+    CONSTRAINT [FK_guacamole_connection_history_attribute_history_id]
+        FOREIGN KEY ([history_id])
+        REFERENCES [guacamole_connection_history] ([history_id])
+        ON DELETE CASCADE
+
+);
+
+GO
+
+
+--
+-- Table of arbitrary user history attributes. Each attribute is simply a
+-- name/value pair associated with a user history record. Arbitrary attributes
+-- can be defined by either this extension or by other extensions that
+-- decorate this one, delegating storage of the attributes to this extension.
+--
+
+CREATE TABLE [guacamole_user_history_attribute] (
+
+    [history_id]      [int]            NOT NULL,
+    [attribute_name]  [nvarchar](128)  NOT NULL,
+    [attribute_value] [nvarchar](4000) NOT NULL,
+
+    CONSTRAINT [PK_guacamole_user_history_attribute]
+        PRIMARY KEY CLUSTERED ([history_id], [attribute_name]),
+
+    CONSTRAINT [FK_guacamole_user_history_attribute_history_id]
+        FOREIGN KEY ([history_id])
+        REFERENCES [guacamole_user_history] ([history_id])
+        ON DELETE CASCADE
+
+);
+
+GO
+
+--
 -- Handle cascading deletion/updates of records in response to deletion of
 -- guacamole_entity records, where such deletion is not already covered by
 -- ON DELETE CASCADE or ON DELETE SET NULL.

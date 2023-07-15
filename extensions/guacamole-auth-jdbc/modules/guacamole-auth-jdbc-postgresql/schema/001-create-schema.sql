@@ -734,3 +734,50 @@ CREATE TABLE guacamole_user_password_history (
 CREATE INDEX guacamole_user_password_history_user_id
     ON guacamole_user_password_history(user_id);
 
+--
+-- Table of arbitrary connection history attributes. Each attribute is simply a
+-- name/value pair associated with a connection history record. Arbitrary
+-- attributes can be defined by either this extension or by other extensions
+-- that decorate this one, delegating underlying storage to this extension.
+--
+
+CREATE TABLE guacamole_connection_history_attribute (
+
+  history_id      integer       NOT NULL,
+  attribute_name  varchar(128)  NOT NULL,
+  attribute_value varchar(4096) NOT NULL,
+
+  PRIMARY KEY (history_id, attribute_name),
+
+  CONSTRAINT guacamole_connection_history_attribute_ibfk_1
+    FOREIGN KEY (history_id)
+    REFERENCES guacamole_connection_history(history_id) ON DELETE CASCADE
+
+);
+
+CREATE INDEX guacamole_connection_history_attribute_history_id
+    ON guacamole_connection_history_attribute(history_id);
+
+--
+-- Table of arbitrary user history attributes. Each attribute is simply a
+-- name/value pair associated with a user history record. Arbitrary attributes
+-- can be defined by this extension or by other extensions that decorate this
+-- one, delegating underlying storage to this extension.
+--
+
+CREATE TABLE guacamole_user_history_attribute (
+
+  history_id      integer       NOT NULL,
+  attribute_name  varchar(128)  NOT NULL,
+  attribute_value varchar(4096) NOT NULL,
+
+  PRIMARY KEY (history_id, attribute_name),
+
+  CONSTRAINT guacamole_user_history_attribute_ibfk_1
+    FOREIGN KEY (history_id)
+    REFERENCES guacamole_user_history(history_id) ON DELETE CASCADE
+
+);
+
+CREATE INDEX guacamole_user_history_attribute_history_id
+    ON guacamole_user_history_attribute(history_id);
