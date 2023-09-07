@@ -1002,6 +1002,16 @@ associate_apisessiontimeout() {
     set_optional_property "api-session-timeout" "$API_SESSION_TIMEOUT"
 }
 
+##  
+## Configures auth-restrict plugin
+##  
+associate_auth_restrict() {
+
+    # Add required .jar files to GUACAMOLE_EXT
+    ln -s /opt/guacamole/auth-restrict/guacamole-auth-restrict*.jar "$GUACAMOLE_EXT"
+}
+
+
 ##
 ## Starts Guacamole under Tomcat, replacing the current process with the
 ## Tomcat process. As the current process will be replaced, this MUST be the
@@ -1169,6 +1179,11 @@ fi
 if [ -n "$JSON_SECRET_KEY" ]; then
     associate_json
     INSTALLED_AUTH="$INSTALLED_AUTH json"
+fi
+
+# Use Auth_Restrict if specified.
+if [ "$AUTH_RESTRICT_ENABLED" = "true" ]; then
+    associate_auth_restrict
 fi
 
 #
