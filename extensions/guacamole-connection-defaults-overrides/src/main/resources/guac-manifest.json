@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.3",
+
+    "name"      : "Connection Defaults and Overrides",
+    "namespace" : "defaults-overrides",
+
+    "authProviders" : [
+        "org.apache.guacamole.connection.ConnectionDefaultOverrideProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}

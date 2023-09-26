@@ -51,6 +51,7 @@
         <module>guacamole-auth-totp</module>
 
         <!-- Additional features -->
+        <module>guacamole-connection-defaults-overrides</module>
         <module>guacamole-history-recording-storage</module>
         <module>guacamole-vault</module>
 
