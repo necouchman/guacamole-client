@@ -955,6 +955,14 @@ associate_recordings() {
     ln -s /opt/guacamole/recordings/guacamole-history-recording-storage-*.jar "$GUACAMOLE_EXT"
 }
 
+##  
+## Loads the login restriction extension
+##  
+associate_restrict() {
+    # Add required .jar files to GUACAMOLE_EXT
+    ln -s /opt/guacamole/restrict/guacamole-auth-restrict-*.jar "$GUACAMOLE_EXT"
+}
+
 ##
 ## Sets up Tomcat's remote IP valve that allows gathering the remote IP
 ## from headers set by a remote proxy
@@ -1187,6 +1195,11 @@ fi
 # Add in the history recording storage extension if configured
 if [ -n "$RECORDING_SEARCH_PATH" ]; then
     associate_recordings
+fi
+
+# Add in the login restriction extension if configured
+if [ -n "$AUTH_RESTRICT_ENABLED" ]; then
+    associate_restrict
 fi
 
 #
