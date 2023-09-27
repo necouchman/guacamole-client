@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.3",
+
+    "name"      : "Connection Registration",
+    "namespace" : "connection-registration",
+
+    "authProviders" : [
+        "org.apache.guacamole.connection.ConnectionRegistrationProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
