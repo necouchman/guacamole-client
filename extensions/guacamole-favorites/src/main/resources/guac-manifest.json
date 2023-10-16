@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.3",
+
+    "name"      : "Guacamole Favorites",
+    "namespace" : "favorites",
+
+    "authProviders" : [
+        "org.apache.guacamole.favorites.FavoritesProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
