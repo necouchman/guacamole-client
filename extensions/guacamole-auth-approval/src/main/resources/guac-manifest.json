@@ -1,0 +1,24 @@
+{
+
+    "guacamoleVersion" : "1.5.4",
+
+    "name"      : "Approval Management Extension",
+    "namespace" : "approval",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.approval.ApprovalAuthenticationProvider"
+    ],
+
+    "js" : [
+        "guacApproval.min.js"
+    ],
+
+    "css" : [
+        "guacApproval.min.css"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}

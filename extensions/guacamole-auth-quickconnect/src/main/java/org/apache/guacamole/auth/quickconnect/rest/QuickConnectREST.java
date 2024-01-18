@@ -28,7 +28,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.quickconnect.QuickConnectDirectory;
-import org.apache.guacamole.auth.quickconnect.utility.QCParser;
 
 /**
  * A class that implements REST endpoints for the QuickConnect
