@@ -78,8 +78,8 @@ public class SimpleConnectionGroup extends AbstractConnectionGroup {
         setType(ConnectionGroup.Type.ORGANIZATIONAL);
 
         // Populate contents
-        this.connectionIdentifiers = new HashSet<String>(connectionIdentifiers);
-        this.connectionGroupIdentifiers = new HashSet<String>(connectionGroupIdentifiers);
+        this.connectionIdentifiers = new HashSet<>(connectionIdentifiers);
+        this.connectionGroupIdentifiers = new HashSet<>(connectionGroupIdentifiers);
 
     }
 

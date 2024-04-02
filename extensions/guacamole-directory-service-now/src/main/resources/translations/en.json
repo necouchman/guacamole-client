@@ -1,0 +1,25 @@
+{
+
+    "DATA_SOURCE_SERVICE_NOW" : {
+        "NAME" : "Service Now Directory"
+    },
+    
+    "CONNECTION_GROUP_ATTRIBUTES" : {
+        
+        "FIELD_HEADER_GUAC_SERVICE_NOW_ENABLED" : "Service Now query enabled",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_TABLE"   : "CMDB table to query",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_QUERY"   : "Table query",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_RDP_CLASSES"    : "RDP protocol enabled for classes",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_SSH_CLASSES"    : "SSH protocol enabled for classes",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_TELNET_CLASSES" : "Telnet protocol enabled for classes",
+        "FIELD_HEADER_GUAC_SERVICE_NOW_VNC_CLASSES"    : "VNC protocol enabled for classes",
+        
+        "SECTION_HEADER_GUAC_SERVICE_NOW_FORM" : "Service Now CMDB Integration"
+        
+    },
+
+    "SERVICE_NOW" : {
+        
+    }
+
+}

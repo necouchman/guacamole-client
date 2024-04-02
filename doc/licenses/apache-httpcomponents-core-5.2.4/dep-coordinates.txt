@@ -1,0 +1,2 @@
+org.apache.httpcomponents.core5:httpcore5:jar:5.2.4
+org.apache.httpcomponents.core5:httpcore5-h2:jar:5.2.4

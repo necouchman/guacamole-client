@@ -51,6 +51,9 @@
         <module>guacamole-auth-sso</module>
         <module>guacamole-auth-totp</module>
 
+        <!-- Connection directory extensions -->
+        <module>guacamole-directory-service-now</module>
+
         <!-- Additional features -->
         <module>guacamole-history-recording-storage</module>
         <module>guacamole-vault</module>
