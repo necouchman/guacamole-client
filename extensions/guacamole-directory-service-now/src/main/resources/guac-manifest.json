@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.5.5",
+
+    "name"      : "Service Now Directory",
+    "namespace" : "service-now",
+
+    "authProviders" : [
+        "org.apache.guacamole.directory.ServiceNowDirectoryProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
