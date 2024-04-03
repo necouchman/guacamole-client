@@ -64,13 +64,13 @@ public class ConnectionGroupModel extends ChildObjectModel {
      * The identifiers of all readable child connections within this connection
      * group.
      */
-    private Set<String> connectionIdentifiers = new HashSet<String>();
+    private Set<String> connectionIdentifiers = new HashSet<>();
 
     /**
      * The identifiers of all readable child connection groups within this
      * connection group.
      */
-    private Set<String> connectionGroupIdentifiers = new HashSet<String>();
+    private Set<String> connectionGroupIdentifiers = new HashSet<>();
 
     /**
      * Creates a new, empty connection group.

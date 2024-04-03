@@ -31,6 +31,7 @@ import org.apache.guacamole.auth.jdbc.JDBCEnvironment;
 import org.apache.guacamole.auth.jdbc.base.ModeledChildDirectoryObject;
 import org.apache.guacamole.auth.jdbc.tunnel.GuacamoleTunnelService;
 import org.apache.guacamole.form.BooleanField;
+import org.apache.guacamole.form.EnumField;
 import org.apache.guacamole.form.Field;
 import org.apache.guacamole.form.Form;
 import org.apache.guacamole.form.NumericField;
@@ -52,6 +53,36 @@ public class ModeledConnectionGroup extends ModeledChildDirectoryObject<Connecti
      */
     private static final Logger logger = LoggerFactory.getLogger(ModeledConnectionGroup.class);
 
+    /**
+     * The name of the attribute that contains the configuration for how this
+     * connection should be displayed when it is launched.
+     */
+    public static final String DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME = "display-launch-setting";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in the current window, which is the default.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_CURRENT_WINDOW = "current-window";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in a new window.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_NEW_WINDOW = "new-window";
+
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in a new tab.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_NEW_TAB = "new-tab";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in full screen mode.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_FULL_SCREEN = "full-screen";
+    
     /**
      * The name of the attribute which controls the maximum number of
      * concurrent connections.
@@ -82,22 +113,37 @@ public class ModeledConnectionGroup extends ModeledChildDirectoryObject<Connecti
     ));
 
     /**
+     * All attributes related to how the connection group is displayed.
+     */
+    public static final Form DISPLAY_SETTINGS = new Form("display-settings", Arrays.asList(
+        new EnumField(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME, Arrays.asList(
+                "",
+                DISPLAY_LAUNCH_VALUE_CURRENT_WINDOW,
+                DISPLAY_LAUNCH_VALUE_NEW_WINDOW,
+                DISPLAY_LAUNCH_VALUE_NEW_TAB,
+                DISPLAY_LAUNCH_VALUE_FULL_SCREEN
+        ))
+    ));
+    
+    /**
      * All possible attributes of connection group objects organized as
      * individual, logical forms.
      */
     public static final Collection<Form> ATTRIBUTES = Collections.unmodifiableCollection(Arrays.asList(
-        CONCURRENCY_LIMITS
+        CONCURRENCY_LIMITS,
+        DISPLAY_SETTINGS
     ));
-
+    
     /**
      * The names of all attributes which are explicitly supported by this
      * extension's ConnectionGroup objects.
      */
     public static final Set<String> ATTRIBUTE_NAMES =
-            Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
+            Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
                 MAX_CONNECTIONS_NAME,
                 MAX_CONNECTIONS_PER_USER_NAME,
-                ENABLE_SESSION_AFFINITY
+                ENABLE_SESSION_AFFINITY,
+                DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME
             )));
 
     /**
@@ -178,6 +224,9 @@ public class ModeledConnectionGroup extends ModeledChildDirectoryObject<Connecti
         // Include any defined arbitrary attributes
         Map<String, String> attributes = super.getAttributes();
 
+        if (attributes.get(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME) == null)
+            attributes.put(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME, null);
+        
         // Set connection limit attribute
         attributes.put(MAX_CONNECTIONS_NAME, NumericField.format(getModel().getMaxConnections()));
 

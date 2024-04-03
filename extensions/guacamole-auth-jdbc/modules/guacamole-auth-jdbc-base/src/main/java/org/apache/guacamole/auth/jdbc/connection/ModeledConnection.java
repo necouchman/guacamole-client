@@ -63,6 +63,36 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
     private static final Logger logger = LoggerFactory.getLogger(ModeledConnection.class);
 
     /**
+     * The name of the attribute that contains the configuration for how this
+     * connection should be displayed when it is launched.
+     */
+    public static final String DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME = "display-launch-setting";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in the current window, which is the default.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_CURRENT_WINDOW = "current-window";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in a new window.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_NEW_WINDOW = "new-window";
+
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in a new tab.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_NEW_TAB = "new-tab";
+    
+    /**
+     * The value of the "display-launch-setting" attribute that specifies that
+     * the connection should open in full screen mode.
+     */
+    public static final String DISPLAY_LAUNCH_VALUE_FULL_SCREEN = "full-screen";
+    
+    /**
      * The name of the attribute which overrides the hostname used to connect
      * to guacd for this connection.
      */
@@ -97,7 +127,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * which will be used to connect to the remote desktop described by this
      * connection.
      */
-    public static final Form GUACD_PARAMETERS = new Form("guacd", Arrays.<Field>asList(
+    public static final Form GUACD_PARAMETERS = new Form("guacd", Arrays.asList(
         new TextField(GUACD_HOSTNAME_NAME),
         new NumericField(GUACD_PORT_NAME),
         new EnumField(GUACD_ENCRYPTION_NAME, Arrays.asList(
@@ -135,7 +165,7 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * All attributes related to restricting user accounts, within a logical
      * form.
      */
-    public static final Form CONCURRENCY_LIMITS = new Form("concurrency", Arrays.<Field>asList(
+    public static final Form CONCURRENCY_LIMITS = new Form("concurrency", Arrays.asList(
         new NumericField(MAX_CONNECTIONS_NAME),
         new NumericField(MAX_CONNECTIONS_PER_USER_NAME)
     ));
@@ -143,9 +173,22 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
     /**
      * All attributes related to load balancing in a logical form.
      */
-    public static final Form LOAD_BALANCING = new Form("load-balancing", Arrays.<Field>asList(
+    public static final Form LOAD_BALANCING = new Form("load-balancing", Arrays.asList(
         new NumericField(CONNECTION_WEIGHT),
         new BooleanField(FAILOVER_ONLY_NAME, "true")
+    ));
+    
+    /**
+     * All attributes related to how the connection is displayed.
+     */
+    public static final Form DISPLAY_SETTINGS = new Form("display-settings", Arrays.asList(
+        new EnumField(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME, Arrays.asList(
+                "",
+                DISPLAY_LAUNCH_VALUE_CURRENT_WINDOW,
+                DISPLAY_LAUNCH_VALUE_NEW_WINDOW,
+                DISPLAY_LAUNCH_VALUE_NEW_TAB,
+                DISPLAY_LAUNCH_VALUE_FULL_SCREEN
+        ))
     ));
 
     /**
@@ -155,7 +198,8 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
     public static final Collection<Form> ATTRIBUTES = Collections.unmodifiableCollection(Arrays.asList(
         CONCURRENCY_LIMITS,
         LOAD_BALANCING,
-        GUACD_PARAMETERS
+        GUACD_PARAMETERS,
+        DISPLAY_SETTINGS
     ));
 
     /**
@@ -163,14 +207,15 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
      * extension's Connection objects.
      */
     public static final Set<String> ATTRIBUTE_NAMES =
-            Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
+            Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
                 GUACD_HOSTNAME_NAME,
                 GUACD_PORT_NAME,
                 GUACD_ENCRYPTION_NAME,
                 MAX_CONNECTIONS_NAME,
                 MAX_CONNECTIONS_PER_USER_NAME,
                 CONNECTION_WEIGHT,
-                FAILOVER_ONLY_NAME
+                FAILOVER_ONLY_NAME,
+                DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME
             )));
 
     /**
@@ -289,6 +334,9 @@ public class ModeledConnection extends ModeledChildDirectoryObject<ConnectionMod
 
         // Include any defined arbitrary attributes
         Map<String, String> attributes = super.getAttributes();
+        
+        if (attributes.get(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME) == null)
+            attributes.put(DISPLAY_LAUNCH_SETTING_ATTRIBUTE_NAME, null);
 
         // Set connection limit attribute
         attributes.put(MAX_CONNECTIONS_NAME, NumericField.format(getModel().getMaxConnections()));
