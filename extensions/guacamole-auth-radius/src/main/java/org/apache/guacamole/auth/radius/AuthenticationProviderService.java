@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
+import org.aaa4j.radius.core.packet.Packet;
 import org.apache.guacamole.auth.radius.user.AuthenticatedUser;
 import org.apache.guacamole.auth.radius.form.GuacamoleRadiusChallenge;
 import org.apache.guacamole.auth.radius.form.RadiusStateField;
@@ -35,13 +36,6 @@ import org.apache.guacamole.net.auth.credentials.GuacamoleInvalidCredentialsExce
 import org.apache.guacamole.net.auth.credentials.GuacamoleInsufficientCredentialsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.jradius.dictionary.Attr_State;
-import net.jradius.dictionary.Attr_ReplyMessage;
-import net.jradius.packet.RadiusPacket;
-import net.jradius.packet.AccessAccept;
-import net.jradius.packet.AccessChallenge;
-import net.jradius.packet.AccessReject;
-import net.jradius.packet.attribute.RadiusAttribute;
 import org.apache.guacamole.form.PasswordField;
 
 /**
@@ -90,7 +84,7 @@ public class AuthenticationProviderService {
      *     state or the reply are missing from the challenge this method will
      *     return null.
      */
-    private GuacamoleRadiusChallenge getRadiusChallenge(RadiusPacket challengePacket) {
+    private GuacamoleRadiusChallenge getRadiusChallenge(Packet challengePacket) {
 
         // Try to get the state attribute - if it's not there, we have a problem
         RadiusAttribute stateAttr = challengePacket.findAttribute(Attr_State.TYPE);

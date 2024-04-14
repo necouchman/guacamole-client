@@ -23,33 +23,18 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
+import org.aaa4j.radius.client.RadiusClient;
+import org.aaa4j.radius.client.clients.UdpRadiusClient;
+import org.aaa4j.radius.core.packet.Packet;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleServerException;
 import org.apache.guacamole.auth.radius.conf.ConfigurationService;
 import org.apache.guacamole.auth.radius.conf.RadiusAuthenticationProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.jradius.client.RadiusClient;
-import net.jradius.dictionary.Attr_CleartextPassword;
-import net.jradius.dictionary.Attr_ClientIPAddress;
-import net.jradius.dictionary.Attr_NASIPAddress;
-import net.jradius.dictionary.Attr_NASPortType;
-import net.jradius.dictionary.Attr_ReplyMessage;
-import net.jradius.dictionary.Attr_State;
-import net.jradius.dictionary.Attr_UserName;
-import net.jradius.dictionary.Attr_UserPassword;
-import net.jradius.exception.RadiusException;
-import net.jradius.packet.RadiusPacket;
-import net.jradius.packet.AccessRequest;
-import net.jradius.packet.attribute.AttributeList;
-import net.jradius.client.auth.EAPTLSAuthenticator;
-import net.jradius.client.auth.EAPTTLSAuthenticator;
-import net.jradius.client.auth.RadiusAuthenticator;
-import net.jradius.packet.attribute.AttributeFactory;
-import net.jradius.packet.AccessChallenge;
-import net.jradius.packet.RadiusResponse;
 
 /**
  * Service for creating and managing connections to RADIUS servers.
@@ -82,21 +67,10 @@ public class RadiusConnectionService {
     private RadiusClient createRadiusConnection() throws GuacamoleException {
 
         // Create the RADIUS client with the configuration parameters
-        try {
-            return new RadiusClient(InetAddress.getByName(confService.getRadiusServer()),
-                                            confService.getRadiusSharedSecret(),
-                                            confService.getRadiusAuthPort(),
-                                            confService.getRadiusAcctPort(),
-                                            confService.getRadiusTimeout());
-        }
-        catch (UnknownHostException e) {
-            logger.debug("Failed to resolve host.", e);
-            throw new GuacamoleServerException("Unable to resolve RADIUS server host.", e);
-        }
-        catch (IOException e) {
-            logger.debug("Failed to communicate with host.", e);
-            throw new GuacamoleServerException("Failed to communicate with RADIUS server.", e);
-        }
+            return UdpRadiusClient.newBuilder()
+                    .secret(confService.getRadiusSharedSecret().getBytes())
+                    .address(new InetSocketAddress(confService.getRadiusServer(), confService.getRadiusAuthPort()))
+                    .build();
 
     }
 
@@ -181,7 +155,7 @@ public class RadiusConnectionService {
      * @throws GuacamoleException
      *     If an error occurs while talking to the server.
      */
-    public RadiusPacket authenticate(String username, String secret, 
+    public Packet authenticate(String username, String secret, 
                 String clientAddress, byte[] state)
             throws GuacamoleException {
 

@@ -19,15 +19,6 @@
 
 package org.apache.guacamole.auth.radius.conf;
 
-import net.jradius.client.RadiusClient;
-import net.jradius.client.auth.CHAPAuthenticator;
-import net.jradius.client.auth.EAPMD5Authenticator;
-import net.jradius.client.auth.EAPTLSAuthenticator;
-import net.jradius.client.auth.EAPTTLSAuthenticator;
-import net.jradius.client.auth.MSCHAPv1Authenticator;
-import net.jradius.client.auth.MSCHAPv2Authenticator;
-import net.jradius.client.auth.PAPAuthenticator;
-import net.jradius.client.auth.RadiusAuthenticator;
 import org.apache.guacamole.properties.EnumGuacamoleProperty.PropertyValue;
 
 /**

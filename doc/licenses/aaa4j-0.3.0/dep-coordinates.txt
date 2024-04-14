@@ -1,0 +1,2 @@
+org.aaa4j.radius:aaa4j-radius-client:jar:0.3.0
+org.aaa4j.radius:aaa4j-radius-core:jar:0.3.0
