@@ -1,0 +1,22 @@
+{
+
+    "DATA_SOURCE_HASHICORP_VAULT" : {
+        "NAME" : "HashiCorp Vault"
+    },
+
+    "CONNECTION_ATTRIBUTES" : {
+        "SECTION_HEADER_HCV_CONFIG"            : "HashiCorp Vault",
+        "FIELD_HEADER_HCV_USER_CONFIG_ENABLED" : "Allow user-provided vault configuration"
+    },
+
+    "CONNECTION_GROUP_ATTRIBUTES" : {
+        "SECTION_HEADER_HCV_CONFIG" : "HashiCorp Vault",
+        "FIELD_HEADER_HCV_CONFIG"   : "HashiCorp Vault Service Configuration "
+    },
+
+    "USER_ATTRIBUTES" : {
+        "SECTION_HEADER_HCV_CONFIG" : "HashiCorp Vault",
+        "FIELD_HEADER_HCV_CONFIG"   : "HashiCorp Vault Service Configuration "
+    }
+
+}

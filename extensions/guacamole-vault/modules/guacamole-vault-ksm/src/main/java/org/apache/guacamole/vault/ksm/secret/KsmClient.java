@@ -29,7 +29,6 @@ import com.keepersecurity.secretsManager.core.Login;
 import com.keepersecurity.secretsManager.core.Notation;
 import com.keepersecurity.secretsManager.core.SecretsManager;
 import com.keepersecurity.secretsManager.core.SecretsManagerOptions;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,11 +42,10 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.annotation.Nullable;
-
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.vault.ksm.conf.KsmConfigurationService;
+import org.apache.guacamole.vault.secret.UserLogin;
 import org.apache.guacamole.vault.secret.WindowsUsername;
 import org.apache.guacamole.vault.ksm.GuacamoleExceptionSupplier;
 import org.slf4j.Logger;
@@ -89,7 +87,7 @@ public class KsmClient {
 
     /**
      * The regular expression that Keeper notation must match to be related to
-     * file retrieval. As the Keeper SDK provides mutually-exclusive for
+     * file retrieval. As the Keeper SDK provides mutually-exclusive methods for
      * retrieving secret values and files via notation, the notation must first
      * be tested to determine whether it refers to a file.
      */
@@ -161,7 +159,7 @@ public class KsmClient {
      * multiple records, and thus cannot uniquely identify a record. The
      * contents of this Set are automatically updated if
      * {@link #validateCache()} refreshes the cache. This Set must not be
-     * accessed without {@link #cacheLock} acquired appropriately.This Set
+     * accessed without {@link #cacheLock} acquired appropriately. This Set
      * must be checked before using a value retrieved from
      * {@link #cachedRecordsByHost}.
      */

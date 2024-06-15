@@ -26,7 +26,7 @@ import org.apache.guacamole.GuacamoleServerException;
 
 /**
  * A utility for parsing base64-encoded JSON, as output by the Keeper Commander
- * CLI tool via the "sm client add" command into a Keeper Secrets Manager
+ * CLI tool via the "ksm client add" command into a Keeper Secrets Manager
  * {@link KeyValueStorage} object.
  */
 public class KsmConfig {

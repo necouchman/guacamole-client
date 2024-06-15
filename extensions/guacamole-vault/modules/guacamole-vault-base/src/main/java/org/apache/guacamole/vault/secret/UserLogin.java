@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.apache.guacamole.vault.ksm.secret;
+package org.apache.guacamole.vault.secret;
 
 import java.util.Objects;
 
@@ -25,9 +25,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * A class intended for use as a key in KSM user record client cache. This
- * class contains both a username and a password. When identifying a KSM
- * record using token syntax like "KEEPER_USER_*", the user record will
+ * A class intended for use as a key in the user record client cache. This
+ * class may contain both a username and a domain. When identifying a KSM
+ * record using token syntax like "VAULT_USER_*", the user record will
  * actually be identified by both the user and domain, if the appropriate
  * settings are enabled.
  */
@@ -56,7 +56,7 @@ class UserLogin {
      * @param domain
      *    The domain to create the UserLogin instance with. This can be null.
      */
-    UserLogin(@Nonnull String username, @Nullable String domain) {
+    public UserLogin(@Nonnull String username, @Nullable String domain) {
         this.username = username;
         this.domain = domain;
     }

@@ -17,31 +17,31 @@
  * under the License.
  */
 
-package org.apache.guacamole.vault.ksm;
+package org.apache.guacamole.vault.hashi;
 
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.vault.VaultAuthenticationProvider;
 
 /**
- * VaultAuthenticationProvider implementation which reads secrets from Keeper
- * Secrets Manager (KSM)
+ * VaultAuthenticationProvider implementation which reads secrets from Hashi Corp
+ * Vault
  */
-public class KsmAuthenticationProvider extends VaultAuthenticationProvider {
+public class HashiCorpVaultAuthenticationProvider extends VaultAuthenticationProvider {
 
     /**
-     * Creates a new KsmAuthenticationProvider which reads secrets from a
-     * configured Keeper Secrets Manager.
+     * Creates a new HashiCorpVaultAuthenticationProvider which reads secrets
+     * from a configured HashiCorp Vault.
      *
      * @throws GuacamoleException
      *     If configuration details cannot be read from guacamole.properties.
      */
-    public KsmAuthenticationProvider() throws GuacamoleException {
-        super(new KsmAuthenticationProviderModule());
+    public HashiCorpVaultAuthenticationProvider() throws GuacamoleException {
+        super(new HashiCorpVaultAuthenticationProviderModule());
     }
 
     @Override
     public String getIdentifier() {
-        return "keeper-secrets-manager";
+        return "hashi-corp-vault";
     }
 
 }

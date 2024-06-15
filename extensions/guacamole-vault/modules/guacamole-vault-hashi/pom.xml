@@ -24,45 +24,42 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.guacamole</groupId>
-    <artifactId>guacamole-vault</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>guacamole-vault-hashi</artifactId>
+    <packaging>jar</packaging>
     <version>1.6.0</version>
-    <name>guacamole-vault</name>
+    <name>guacamole-vault-hashi</name>
     <url>http://guacamole.apache.org/</url>
 
     <parent>
         <groupId>org.apache.guacamole</groupId>
-        <artifactId>extensions</artifactId>
+        <artifactId>guacamole-vault</artifactId>
         <version>1.6.0</version>
-        <relativePath>../</relativePath>
+        <relativePath>../../</relativePath>
     </parent>
 
-    <modules>
+    <dependencies>
 
-        <!-- Distribution .tar.gz -->
-        <module>modules/guacamole-vault-dist</module>
+        <!-- Guacamole Extension API -->
+        <dependency>
+            <groupId>org.apache.guacamole</groupId>
+            <artifactId>guacamole-ext</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-        <!-- Base key vault classes -->
-        <module>modules/guacamole-vault-base</module>
+        <!-- Guacamole base key vault support -->
+        <dependency>
+            <groupId>org.apache.guacamole</groupId>
+            <artifactId>guacamole-vault-base</artifactId>
+            <version>1.6.0</version>
+        </dependency>
 
-        <!-- Provider-specific implementations -->
-        <module>modules/guacamole-vault-hashi</module>
-        <module>modules/guacamole-vault-ksm</module>
+        <!-- Driver for accessing HashiCorp Vault -->
+        <dependency>
+            <groupId>io.github.jopenlibs</groupId>
+            <artifactId>vault-java-driver</artifactId>
+            <version>6.2.0</version>
+        </dependency>
 
-    </modules>
-
-    <dependencyManagement>
-        <dependencies>
-
-            <!-- Guacamole Extension API -->
-            <dependency>
-                <groupId>org.apache.guacamole</groupId>
-                <artifactId>guacamole-ext</artifactId>
-                <version>1.6.0</version>
-                <scope>provided</scope>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
+    </dependencies>
 
 </project>

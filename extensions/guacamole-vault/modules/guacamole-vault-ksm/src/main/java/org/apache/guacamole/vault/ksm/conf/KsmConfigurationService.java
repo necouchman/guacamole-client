@@ -161,19 +161,7 @@ public class KsmConfigurationService extends VaultConfigurationService {
         return environment.getProperty(ALLOW_UNVERIFIED_CERT, false);
     }
 
-    /**
-     * Return whether user-level KSM configs should be enabled. If this
-     * flag is set to true, users can edit their own KSM configs, as can
-     * admins. If set to false, no existing user-specific KSM configuration
-     * will be exposed through the UI or used when looking up secrets.
-     *
-     * @return
-     *     true if user-specific KSM configuration is enabled, false otherwise.
-     *
-     * @throws GuacamoleException
-     *     If the value specified within guacamole.properties cannot be
-     *     parsed.
-     */
+    @Override
     public boolean getAllowUserConfig() throws GuacamoleException {
         return environment.getProperty(ALLOW_USER_CONFIG, false);
     }

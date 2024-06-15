@@ -186,6 +186,21 @@ public abstract class VaultConfigurationService {
         };
 
     }
+    
+    /**
+     * Return whether user-level vault configurations should be enabled. If this
+     * flag is set to true, users can edit their own vault configurations, as
+     * can admins. If set to false, no existing user-specific configuration
+     * will be exposed through the UI or used when looking up secrets.
+     *
+     * @return
+     *     true if user-specific vault configuration is enabled, false otherwise.
+     *
+     * @throws GuacamoleException
+     *     If the value specified within guacamole.properties cannot be
+     *     parsed.
+     */
+    public abstract boolean getAllowUserConfig() throws GuacamoleException;
 
     /**
      * Return whether Windows domains should be split out from usernames when
