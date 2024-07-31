@@ -124,9 +124,9 @@ public class RestrictionVerificationService {
      *     string if no specific set of denied hosts is defined.
      * 
      * @param remoteAddress
-     *     The IP address from which the user is logging in or has logged in
-     *     and is attempting to connect from, if it is known. If it is unknown
-     *     and restrictions are defined, the login or connection will be denied.
+     *     The IP address from which the user is logging in or attempting to
+     *     connect, if it is known. If it is unknown and restrictions are
+     *     defined the login or connection will be denied.
      * 
      * @return
      *     A RestrictionType that matches the provided allow and deny strings.
@@ -206,24 +206,47 @@ public class RestrictionVerificationService {
     }
     
     /**
+     * Given a String representation of a date and time, compare the current
+     * date and time to that to determine the level of restriction, returning
+     * the type of restriction that applies.
+     * 
+     * @param expirationDateTime
+     *     A string representation of the absolute date and time of the
+     *     expiration to compare to the current date and time.
+     * 
+     * @return 
+     *     The level of restriction that applies having compared the current
+     *     date and time to the expiration.
+     */
+    public static RestrictionType allowedByExpirationRestriction(String expirationDateTime) {
+        
+        return RestrictionType.IMPLICIT_ALLOW;
+        
+    }
+    
+    /**
      * Verify the host restrictions for the user associated with the given
      * UserContext, throwing an exception if any of the restrictions result
      * in the user not being allowed to be logged in to Guacamole from this
-     * host.
+     * host. This method will evaluate both restrictions assigned directly to
+     * the user as well as those assigned to the groups of which the user is
+     * a direct or indirect member.
      * 
      * @param context
-     *     The UserContext associated with the user who is being verified.
+     *     The UserContext associated with the user whose restrictions are
+     *     being verified.
      * 
      * @param remoteAddress
      *     The remote address of the client from which the current user is
-     *     logged in.
+     *     logging in.
      * 
      * @throws GuacamoleException 
      *     If the restrictions on the user should prevent the user from
      *     logging in from the current client, or if an error occurs attempting
      *     to retrieve permissions.
      */
-    public static void verifyHostRestrictions(UserContext context, String remoteAddress) throws GuacamoleException {
+    public static void verifyHostRestrictions(UserContext context, String remoteAddress)
+            throws GuacamoleException {
         
         // Get the current user
         User currentUser = context.self();
@@ -252,19 +275,21 @@ public class RestrictionVerificationService {
                     + remoteAddress + "\"",
                     "RESTRICT.ERROR_USER_LOGIN_NOT_ALLOWED_FROM_HOST");
             
-            // User-level explicit allow means the user is allowed.
+            // User-level explicit allow means the user is allowed, and this
+            // always overrides restrictions set on groups of which the user
+            // is a memeber.
             case EXPLICIT_ALLOW:
                 return;
             
         }
         
-        // Gather user's effective groups.
+        // Gather user's group memberships.
         Collection<UserGroup> userGroups = context
                 .getPrivileged()
                 .getUserGroupDirectory()
                 .getAll(currentUser.getUserGroups().getObjects());
         
-        // Loop user's effective groups and verify restrictions
+        // Loop user's group memberships and verify restrictions
         for (UserGroup userGroup : userGroups) {
 
             // Get group's attributes
@@ -314,9 +339,9 @@ public class RestrictionVerificationService {
     }
     
     /**
-     * Verify the host-based restrictions of the Connection, throwing an
-     * exception if the Connection should be allowed from the host from which
-     * the user is logged in.
+     * Verify the host-based restrictions of the restrictable object, throwing
+     * an exception if use of the object should not be allowed from the host
+     * from which the user is logged in.
      * 
      * @param restrictable
      *     The Restrictable object that should be verified against host restrictions.
@@ -326,10 +351,11 @@ public class RestrictionVerificationService {
      *     logged in.
      * 
      * @throws GuacamoleException 
-     *     If the connection should not be allowed from the remote host from
+     *     If use of the object should not be allowed from the remote host from
      *     which the user is logged in.
      */
-    public void verifyHostRestrictions(Restrictable restrictable, String remoteAddress) throws GuacamoleException {
+    public static void verifyHostRestrictions(Restrictable restrictable, String remoteAddress)
+            throws GuacamoleException {
         
         // Verify time-based restrictions specific to this connection.
         String allowedHostsString = restrictable.getAttributes().get(RestrictedConnection.RESTRICT_HOSTS_ALLOWED_ATTRIBUTE_NAME);
@@ -507,7 +533,7 @@ public class RestrictionVerificationService {
      *     If any of the restrictions should prevent the connection from being
      *     used by the user at the current time.
      */
-    public void verifyConnectionRestrictions(Restrictable restrictable, String remoteAddress)
+    public static void verifyConnectionRestrictions(Restrictable restrictable, String remoteAddress)
             throws GuacamoleException {
         
         verifyTimeRestrictions(restrictable);

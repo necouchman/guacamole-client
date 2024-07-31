@@ -22,25 +22,25 @@ package org.apache.guacamole.auth.restrict.form;
 import org.apache.guacamole.form.Field;
 
 /**
- * A field that parses a string containing time restrictions into its individual
- * components for user-friendly display on the web interface.
+ * A field that triggers the display of a Date/Time input field and assists
+ * with retrieving the data from that field.
  */
-public class TimeRestrictionField extends Field {
+public class DateTimeRestrictionField extends Field {
     
     /**
      * The field type.
      */
-    public static final String FIELD_TYPE = "GUAC_TIME_RESTRICTION";
+    public static final String FIELD_TYPE = "GUAC_DATETIME_RESTRICTION";
     
     /**
-     * Create a new field that tracks time restrictions.
+     * Create a new field that tracks date and time restrictions.
      * 
      * @param name
      *     The name of the parameter that will be used to pass this field
      *     between the REST API and the web front-end.
      * 
      */
-    public TimeRestrictionField(String name) {
+    public DateTimeRestrictionField(String name) {
         super(name, FIELD_TYPE);
     }
     
