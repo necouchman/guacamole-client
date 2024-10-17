@@ -928,6 +928,22 @@ Guacamole.Client = function(tunnel) {
      *     frames.
      */
     this.onsync = null;
+    
+    /**
+     * A callback that is fired whenever a message is received from the server
+     * indicating that the connection is going to be forcibly closed, providing
+     * the number of seconds before the connection is closed and an optional
+     * string indicating the username or process name that is closing the
+     * connection.
+     * 
+     * @event
+     * @param {!number} secondsToClose
+     *     The number of seconds after which the connection will be closed.
+     *     
+     * @param {string} name
+     *     The user name or process name that is forcibly closing the connection.
+     */
+    this.warnclose = null;
 
     /**
      * Returns the layer with the given index, creating it if necessary.
@@ -1000,7 +1016,7 @@ Guacamole.Client = function(tunnel) {
 
         // If parser not yet created, create it, and tie to the
         // oninstruction handler of the tunnel.
-        if (parser == null) {
+        if (parser === null) {
             parser = parsers[index] = new Guacamole.Parser();
             parser.oninstruction = tunnel.oninstruction;
         }
@@ -1517,6 +1533,13 @@ Guacamole.Client = function(tunnel) {
                         username = parameters[2];
                         if (guac_client.onleave)
                             guac_client.onleave(userID, username);
+                        break;
+                        
+                    case Guacamole.Client.Message.WARN_CLOSE:
+                        var secondsToClose = parseInt(parameters[1]);
+                        username = parameters[2];
+                        if (guac_client.warnclose)
+                            guac_client.warnclose(secondsToClose, username);
                         break;
 
                 }
@@ -2075,6 +2098,17 @@ Guacamole.Client.Message = {
      * 
      * @type {!number}
      */
-    "USER_LEFT": 0x0002
+    "USER_LEFT": 0x0002,
+    
+    /**
+     * A lient message that indicates that a process is going to forcibly
+     * close an existing connection. This message expects at least one additional
+     * argument - the number of seconds before the connection is closed. An
+     * additional argument may be provided, as well, indicating the name of the
+     * user or process closing the connection.
+     * 
+     * @type {!number}
+     */
+    "WARN_CLOSE": 0x0004
     
 };
