@@ -640,7 +640,7 @@ public abstract class AbstractGuacamoleTunnelService implements GuacamoleTunnelS
 
         // Retrieve all children
         Collection<ConnectionModel> models = connectionMapper.select(identifiers, environment.getCaseSensitivity());
-        List<ModeledConnection> connections = new ArrayList<ModeledConnection>(models.size());
+        List<ModeledConnection> connections = new ArrayList<>(models.size());
 
         // Convert each retrieved model to a modeled connection
         for (ConnectionModel model : models) {

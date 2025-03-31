@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "1.6.0",
+
+    "name"      : "Connection defaults and templates",
+    "namespace" : "defaults",
+
+    "authProviders" : [
+        "org.apache.guacamole.auth.defaults.DefaultsAuthenticationProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}
