@@ -1,0 +1,16 @@
+{
+
+    "guacamoleVersion" : "${project.version}",
+
+    "name"      : "Multi-User Connection Directory",
+    "namespace" : "multiuser",
+
+    "authProviders" : [
+        "org.apache.guacamole.directory.multiuser.MultiUserConnectionDirectoryProvider"
+    ],
+
+    "translations" : [
+        "translations/en.json"
+    ]
+
+}

@@ -1,0 +1,15 @@
+{
+
+    "DATA_SOURCE_DIRECTORY_MULTI_USER" : {
+        "NAME" : "Multi-User Connection Directory"
+    },
+    
+    "CONNECTION_ATTRIBUTES" : {
+        
+        "FIELD_HEADER_MULTI_USER_CONNECTION_ENABLED" : "Enable multi-user access to this connection: ",
+        
+        "SECTION_HEADER_MULTI_USER_CONNECTION_FORM" : "Multi-User Connection"
+        
+    }
+
+}
