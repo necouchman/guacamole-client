@@ -21,6 +21,8 @@ package org.apache.guacamole.auth.ban.status;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.GuacamoleServerException;
 import org.apache.guacamole.language.TranslatableGuacamoleClientTooManyException;
@@ -191,6 +193,29 @@ public class InMemoryAuthenticationFailureTracker implements AuthenticationFailu
     public void notifyAuthenticationFailed(Credentials credentials)
             throws GuacamoleException {
         notifyAuthenticationStatus(credentials, true);
+    }
+    
+    @Override
+    public Map<String, AuthenticationFailureStatus> getBannedIPs() {
+        
+        Map<String, AuthenticationFailureStatus> bannedIPs = new HashMap<>();
+        
+        // Iterate over the cache and get addresses that are blocked.
+        for (Map.Entry<String, AuthenticationFailureStatus> entry : failures.asMap().entrySet()) {
+            if (entry.getValue().isBlocked())
+                bannedIPs.put(entry.getKey(), entry.getValue());
+        }
+        
+        return bannedIPs;
+        
+    }
+    
+    @Override
+    public void removeBannedAddress(String address) throws GuacamoleException {
+        
+        // Invalidate the entry from the cache.
+        failures.invalidate(address);
+        
     }
 
 }

@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.auth.ban;
 
+import com.google.inject.Inject;
 import org.apache.guacamole.auth.ban.status.AuthenticationFailureTracker;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.auth.ban.status.InMemoryAuthenticationFailureTracker;
@@ -126,6 +127,7 @@ public class BanningAuthenticationListener implements Listener {
     public BanningAuthenticationListener() throws GuacamoleException {
 
         Environment environment = LocalEnvironment.getInstance();
+        
         int maxAttempts = environment.getProperty(MAX_ATTEMPTS, DEFAULT_MAX_ATTEMPTS);
         int banDuration = environment.getProperty(IP_BAN_DURATION, DEFAULT_IP_BAN_DURATION);
         long maxAddresses = environment.getProperty(MAX_ADDRESSES, DEFAULT_MAX_ADDRESSES);
@@ -195,6 +197,16 @@ public class BanningAuthenticationListener implements Listener {
             tracker.notifyAuthenticationSuccess(success.getCredentials());
         }
 
+    }
+    
+    /**
+     * Return the current AuthenticationFailureTracker.
+     * 
+     * @return 
+     *     The current AuthenticationFailureTracker.
+     */
+    public AuthenticationFailureTracker getTracker() {
+        return tracker;
     }
 
 }

@@ -19,6 +19,7 @@
 
 package org.apache.guacamole.auth.ban.status;
 
+import java.util.Map;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.Credentials;
 
@@ -74,5 +75,31 @@ public interface AuthenticationFailureTracker {
      */
     void notifyAuthenticationFailed(Credentials credentials)
             throws GuacamoleException;
+    
+    /**
+     * Returns a Map of currently banned IPs and their associated
+     * AuthenticationFailureStatus.
+     * 
+     * @return
+     *     A Map of the String representation of an IP address that is currently
+     *     banned from logging in along with it's associated
+     *     AuthenticationFailureStatus.
+     * 
+     * @throws GuacamoleException 
+     *     If an error occurs retrieving the current Map of IPs and status.
+     */
+    Map<String, AuthenticationFailureStatus> getBannedIPs()
+            throws GuacamoleException;
+    
+    /**
+     * Remove the specified address from the list of banned IPs.
+     * 
+     * @param address
+     *     The address to remove from the list of banned IPs.
+     * 
+     * @throws GuacamoleException 
+     *     If an error occurs removing the IP address.
+     */
+    void removeBannedAddress(String address) throws GuacamoleException;
 
 }

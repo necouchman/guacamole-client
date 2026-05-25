@@ -19,6 +19,8 @@
 
 package org.apache.guacamole.auth.ban.status;
 
+import java.util.Collections;
+import java.util.Map;
 import org.apache.guacamole.GuacamoleException;
 import org.apache.guacamole.net.auth.Credentials;
 
@@ -43,6 +45,19 @@ public class NullAuthenticationFailureTracker implements AuthenticationFailureTr
     @Override
     public void notifyAuthenticationFailed(Credentials credentials)
             throws GuacamoleException {
+        // Do nothing
+    }
+    
+    @Override
+    public Map<String, AuthenticationFailureStatus> getBannedIPs()
+            throws GuacamoleException {
+        
+        return Collections.emptyMap();
+        
+    }
+    
+    @Override
+    public void removeBannedAddress(String address) throws GuacamoleException {
         // Do nothing
     }
 
